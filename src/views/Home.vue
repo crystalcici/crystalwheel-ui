@@ -5,8 +5,8 @@
       <h1>crystalUI</h1>
       <h2>一个基于TS+Vue3的轮子学习</h2>
       <p class="actions">
-        <a>Github</a>
-        <a>开始</a>
+        <a href="https://github.com/crystalcici">Github</a>
+        <router-link to="/doc">开始</router-link>
       </p>
     </div>
    </div>
