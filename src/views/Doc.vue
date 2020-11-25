@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div class="layout">
     <Topnav/>
     <div class="content">
       <aside v-if="menuVisible">
@@ -31,13 +31,12 @@ import { inject, Ref } from 'vue'
       Topnav
     },
     setup() {
-      const menuVisible = inject<Ref<boolean>>('xxx')
+      const menuVisible = inject<Ref<boolean>>('menuVisible')
       return { menuVisible }
     }
   }
 </script>
 <style lang="scss" scoped>
-  $aside-index : 10;
   .layout {
     display: flex;
     flex-direction: column;
@@ -69,6 +68,7 @@ import { inject, Ref } from 'vue'
     background: lightblue;
     width: 150px;
     padding: 16px 0;
+    position: fixed;
     top: 0;
     left: 0;
     padding-top: 70px;
