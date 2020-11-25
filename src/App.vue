@@ -1,15 +1,14 @@
 <template>
-  <div>hi</div>
-  <wheel/>
+  <div>导航栏 | <router-link to="/">wheel</router-link> | <router-link to="/wheel2">wheel2</router-link></div>
+  <hr/>
+  <router-view/>
 </template>
 
 <script>
-import wheel from './components/wheel.vue'
 
 export default {
   name: 'App',
   components: {
-    wheel
   }
 }
 </script>
