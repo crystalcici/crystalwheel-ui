@@ -1,5 +1,12 @@
 <template>
   <div>
-    Switch 文档
+    <Switch/>
   </div>
 </template>
+<script lang="ts">
+import Switch from '../lib/switch.vue'
+
+export default {
+  components: {Switch}
+}
+</script>
