@@ -5,13 +5,10 @@
       <div class="gulu-dialog-wrapper">
         <div class="gulu-dialog">
           <header>
-            标题
+            <slot name="title" />
             <span @click="close" class="gulu-dialog-close"></span>
           </header>
-          <main>
-            <p>第一行字</p>
-            <p>第二行字</p>
-          </main>
+          <main><slot name="content" /></main>
           <footer>
             <Button @click="ok" level="main">OK</Button>
             <Button @click="cancel">Cancel</Button>
