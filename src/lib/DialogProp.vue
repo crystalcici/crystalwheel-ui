@@ -1,6 +1,6 @@
 <template>
   <template v-if="visible">
-    <div>
+    <teleport to="body">
       <div class="gulu-dialog-overlay" @click="onClickOverlay"></div>
       <div class="gulu-dialog-wrapper">
         <div class="gulu-dialog">
@@ -15,7 +15,7 @@
           </footer>
         </div>
       </div>
-    </div>
+    </teleport>
   </template>
 </template>
 <script lang="ts">
