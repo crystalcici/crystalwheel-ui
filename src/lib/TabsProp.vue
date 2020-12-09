@@ -1,16 +1,26 @@
 <template>
   <div class="gulu-tabs">
     <div class="gulu-tabs-nav">
-      <div class="gulu-tabs-nav-item" 
+      <div class="gulu-tabs-nav-item"
+        v-for="(t, index) in titles" 
+        :ref="el => { if(el) navItems[index] = el}"
+        @click="select(t)"
         :class="{selected: t===selected}"
-        v-for="t in titles" :key="t">{{t}}</div>
+        :key="index">
+        {{t}}
+      </div>
+      <div class="gulu-tabs-nav-indicator" ref="indicator"></div>
     </div>
     <div class="gulu-tabs-content">
-      <component class="gulu-tabs-content-item" v-for="items in defaults" :is="items" :key="items"/>
+      <component class="gulu-tabs-content-item"
+        :class="{selected: c.props.title === selected}" 
+        v-for="c in defaults"
+        :is="c" :key="c"/>
     </div>
   </div>
 </template>
 <script lang="ts">
+import { computed, onMounted, ref } from 'vue'
 import Tab from './TabProp.vue'
 export default {
   props: {
@@ -19,6 +29,14 @@ export default {
     }
   },
   setup(props, context) {
+    const navItems = ref<HTMLDivElement[]>([])
+    const indicator = ref<HTMLDivElement>(null)
+    onMounted(() => {
+      const divs = navItems.value
+      const result = divs.filter((div) => div.classList.contains('selected'))[0]
+      const {width} = result.getBoundingClientRect()
+      indicator.value.style.width = width + 'px'
+    })
     const defaults = context.slots.default()
     defaults.forEach((tag) => {
       if(tag.type !== Tab){
@@ -28,9 +46,22 @@ export default {
     const titles = defaults.map((tag) => {
       return tag.props.title
     })
+    const current = computed(() => {
+      return defaults.filter((tag) => {
+        return tag.props.title === props.selected
+      })[0]
+    })
+    const select = (title: string) => {
+      context.emit('update:selected', title)      
+    }
+    
     return {
       defaults,
-      titles
+      titles,
+      current,
+      select,
+      navItems,
+      indicator
     }
   }
 }
@@ -68,6 +99,12 @@ $border-color: #d9d9d9;
   }
   &-content {
     padding: 8px 0;
+    &-item{
+      display: none;
+      &.selected {
+        display: block;
+      }
+    }
   }
 }
 </style>
