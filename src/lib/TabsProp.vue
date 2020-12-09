@@ -1,6 +1,6 @@
 <template>
   <div class="gulu-tabs">
-    <div class="gulu-tabs-nav">
+    <div class="gulu-tabs-nav" ref="container">
       <div class="gulu-tabs-nav-item"
         v-for="(t, index) in titles" 
         :ref="el => { if(el) navItems[index] = el}"
@@ -20,7 +20,7 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUpdated, ref } from 'vue'
 import Tab from './TabProp.vue'
 export default {
   props: {
@@ -31,12 +31,19 @@ export default {
   setup(props, context) {
     const navItems = ref<HTMLDivElement[]>([])
     const indicator = ref<HTMLDivElement>(null)
-    onMounted(() => {
+    const container = ref<HTMLDivElement>(null)
+    const x = () => {
       const divs = navItems.value
-      const result = divs.filter((div) => div.classList.contains('selected'))[0]
+      const result = navItems.value.filter((div) => div.classList.contains('selected'))[0]
       const {width} = result.getBoundingClientRect()
       indicator.value.style.width = width + 'px'
-    })
+      const { left: left1 } = container.value.getBoundingClientRect()
+      const { left: left2 } = result.getBoundingClientRect()
+      const left = left2 - left1
+      indicator.value.style.left = left + 'px'
+    }
+    onMounted(x);
+    onUpdated(x)
     const defaults = context.slots.default()
     defaults.forEach((tag) => {
       if(tag.type !== Tab){
@@ -61,7 +68,8 @@ export default {
       current,
       select,
       navItems,
-      indicator
+      indicator,
+      container
     }
   }
 }
