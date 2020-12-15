@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="topnavAndBanner">
     <Topnav />
     <div class="banner">
       <h1>crystalUI</h1>
