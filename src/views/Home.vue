@@ -12,15 +12,29 @@
       </div>
     </div>
     <div class="features">
-      <svg class="icon">
-        <use xlink:href="#icon-vue"></use>
-      </svg>
-      <svg class="icon">
-        <use xlink:href="#icon-ts"></use>
-      </svg>
-      <svg class="icon">
-        <use xlink:href="#icon-light"></use>
-      </svg>
+      <ul>
+        <li>
+          <svg class="icon">
+            <use xlink:href="#icon-vue"></use>
+          </svg>
+          <h3>基于Vue 3</h3>
+          <p>初次使用Vue3</p>
+        </li>
+        <li>
+          <svg class="icon">
+            <use xlink:href="#icon-ts"></use>
+          </svg>
+          <h3>基于 TypeScript</h3>
+          <p>采用严格的类型检查机制</p>
+        </li>
+        <li>
+          <svg class="icon">
+            <use xlink:href="#icon-light"></use>
+          </svg>
+          <h3>代码易读</h3>
+          <p>其实组件也不多</p>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -34,7 +48,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 $green: #02bcb0;
-$border-radius: 4px;
+$border-radius: 12px;
 $color: #007974;
 .topnavAndBanner {
   background: linear-gradient(
